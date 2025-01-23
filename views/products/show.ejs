@@ -1,0 +1,85 @@
+<!-- with the help of ejs-Mate -->
+<% layout('layouts/boilerplate') %>   
+<%- include('../partials/flash') %>
+
+<div class="row">
+  
+  <div class="col-lg-6 mt-3">
+    <!-- displaying flash -->
+              
+                <div class="card mx-auto shadow" style="width: 18rem;">
+                    <img src="<%= product.img %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h2 class="card-title"><%= product.name %></h2>
+                      <h5 class="card-title"><%= product.price %></h5>
+                      <p class="card-text"><%= product.desc %></p>
+                      <!-- route : /product -->
+                      <!-- <a href="/product" class="btn btn-ligth btn-sm ">Home</a> -->
+                      <% if(currentUser && currentUser.role === 'seller'){ %>
+                        <a href="/products/<%=product._id%>/edit" class="btn btn-ligth btn-sm ">Edit</a>
+                      <% } %>
+                      <form class="d-inline-block" action="/user/<%= product._id %>/add" method="POST">
+                          <button class="btn btn-success btn-sm ">Add to Cart</button>
+                      </form>
+                      <!-- <a href="/products/<%=product._id%>" class="btn btn-secondary btn-sm ">Buy Product</a> -->
+                      <a href="/showBook/<%=product._id %>" class="btn btn-secondary btn-sm ">Buy Product</a>
+                    </div>
+                  </div>
+            </div>
+
+            <!-- leave a review -->
+            <div class="col-lg-4">
+                <h1 class="display-5">Leave a Reviews</h1>
+                <form action="/products/<%= product._id %>/review" method="POST">
+                    <div>
+                      <fieldset class="starability-basic">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="rating" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="rating" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="rating" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="rating" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="rating" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                      </fieldset>  
+                    </div>
+                    <div>
+                      <label class="form-label" for="comment">Comment</label>
+                      <!-- name : schema wala hi -->
+                       <textarea class="form-control" row="3"  name="comment" id="comment"></textarea> 
+                    </div>
+
+                    <button class="btn btn-sm btn-success">Add Review</button>
+                </form>
+
+                                <!-- show a review  -->
+                <div class="my-3">
+                    <% for(let review of product.reviews){ %>
+                      <div class="card mt-3">
+                          <h3>Rating</h3>
+                          <!-- starability -->
+                          <p class="starability-result" data-rating="<%= review.rating %>">
+                            Rated: <%= review.rating %> stars
+                          </p>
+
+                          <div class="card-body">
+                            <p class="card-text">Comment:<%= review.comment %></p>
+                            <!-- <a href="#" class="btn btn-primary">Delete</a> -->
+                          </div>
+
+                          <p>
+                            <% if(review.createdAt){ %>
+                              <%= review.createdAt.toDateString() %>
+                            <% } %>
+                          </p>
+
+                      </div>
+                    <% } %>
+                </div>
+            </div>
+
+
+</div>

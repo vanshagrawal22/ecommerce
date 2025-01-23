@@ -1,0 +1,80 @@
+<!-- with the help of ejs-Mate -->
+<% layout('layouts/boilerplate') %>  
+<%- include('../partials/navbar') %> 
+
+<div class="row">
+    <div class="col-6 mx-auto">
+        <form action="/products" method="POST" novalidate class="row g-3 needs-validation">
+            <div class="mb-3">
+                <label for="name">Name:</label>
+                <!-- name="vhi jo schema m h(name)" -->
+                <input type="text" class="form-control" name="name" id="name" placeholder="name of the product" required> 
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the name field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="img">Image:</label>
+                <!-- name="same jo appne schema m fill kra h" -->
+                <input type="text" class="form-control" name="img" id="img" placeholder="image url of the product" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the image field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="paisa">Price:</label>
+                <!--  name="vhi jo schema m define kra h"-->
+                <input type="number" class="form-control" name="price" id="paisa" placeholder="price of the product" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the price field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="desc">Desc:</label>
+                <!--  name="vhi jo schema m define kra h"-->
+                <textarea name="desc" id="desc" rows="3" placeholder="Description of the product" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the description field.
+                </div>
+            </div>
+            <button class="btn btn-sm btn-success" type="submit">Add Product</button>
+        </form>
+    </div>
+</div>
+
+    <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+            }, false)
+        })
+        })()  
+        // called itself (iife -> immediately invoked functional expression)
+    </script>
+</body>
+</html>
