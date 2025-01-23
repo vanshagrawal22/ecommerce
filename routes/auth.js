@@ -4,6 +4,7 @@ const passport = require('passport');
 const router = express.Router()
 const nodemailer = require('nodemailer')
 
+require('dotenv').config();
 // to show the form of signup
 router.get('/register' , (req , res)=>{
     res.render('auth/signup');
@@ -34,8 +35,8 @@ router.post('/register' , async(req , res)=>{
             {
                 service:'gmail',
                 auth:{
-                    // user:'agrawalvansh4@gmail.com',
-                    // pass:'jwcmvyvwfbtqhcyeoyeoye' // oyeoye
+                    user:'agrawalvansh4@gmail.com',
+                    pass:process.env.PASS
                 }
             }
         )
