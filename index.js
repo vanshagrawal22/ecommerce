@@ -28,7 +28,7 @@ const authRoutes = require('./routes/auth')
 const cartRoutes = require('./routes/cart')
 const checkRoutes = require('./routes/checkout')
 
-mongoose.connect('mongodb://127.0.0.1:27017/shopping')
+mongoose.connect(process.env.MONGODB)
 .then(()=>{
     console.log("DB connected Successfully");
     
